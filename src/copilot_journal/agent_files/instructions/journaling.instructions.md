@@ -24,7 +24,11 @@ Use these phrases naturally in your Copilot chat:
 
 ### Journal Format
 
-Entries are daily files named `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`. Entries are simple — timestamp + thought. No ceremony:
+Entries are daily files named `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`.
+
+**Before writing:** Always read today's existing file first. Append new entries below existing ones. Never overwrite previous entries.
+
+If no file exists for today, create one. Entries are simple — timestamp + thought. No ceremony:
 
 ```markdown
 ## 10:45 AM
