@@ -84,6 +84,16 @@ Your git log captures **what** changed. Your journal captures **why**.
 
 Six months from now, when someone asks "why did you do it this way?" — you'll have the answer.
 
+## OpenClaw Skill
+
+This repo also includes an [OpenClaw](https://github.com/openclaw/openclaw) skill at `skill/copilot-journal/`. To install it, copy the skill folder to your OpenClaw skills directory:
+
+```bash
+cp -r skill/copilot-journal /path/to/openclaw/skills/
+```
+
+This gives OpenClaw agents the same journaling workflow — capture decisions, reasoning, and context automatically.
+
 ## License
 
 MIT
