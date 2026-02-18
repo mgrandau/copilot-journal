@@ -18,15 +18,21 @@ After installation, GitHub Copilot will automatically:
 - Write status updates ("I did X")
 - Add friction to your workflow
 
-## Quick Commands
+## Two Modes
 
-Use these phrases naturally in your Copilot chat:
+### Real-time capture (always on)
+The instruction file runs passively during every Copilot interaction. Use trigger phrases to capture reasoning as it happens:
 
 | Command | What happens |
 |---------|-------------|
 | `"journal that"` | Captures reasoning from current conversation |
 | `"log this"` | Quick capture of what you just discussed |
 | `"why did we do this?"` | Writes a decision record |
+
+### End-of-day summary (on demand)
+The prompt file generates a structured daily summary when you invoke it. It automatically gathers git commits, AI session data, and memory notes into a formatted journal entry.
+
+Invoke it in Copilot chat by selecting the `daily-summary` prompt, or just say "summarize today".
 
 ## Install
 
@@ -41,7 +47,9 @@ cd your-project
 copilot-journal
 ```
 
-Installs to `.github/instructions/journaling.instructions.md`
+Installs to `.github/`:
+- `instructions/journaling.instructions.md` — always-on, captures decisions as you work
+- `prompts/daily-summary.prompt.md` — on-demand end-of-day summary
 
 ### Global (all repos)
 
