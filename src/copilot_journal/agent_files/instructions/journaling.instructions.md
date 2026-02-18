@@ -1,6 +1,6 @@
 ## Journal
 
-This project includes a journal vault at `docs/vault/` for capturing design decisions,
+This project includes a journal vault at `{{JOURNAL_PATH}}` for capturing design decisions,
 reasoning, and context as you work.
 
 ### Automatic Journaling
@@ -24,7 +24,7 @@ Use these phrases naturally in your Copilot chat:
 
 ### Journal Format
 
-Entries are simple — timestamp + thought. No ceremony:
+Entries are daily files named `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`. Entries are simple — timestamp + thought. No ceremony:
 
 ```markdown
 ## 10:45 AM

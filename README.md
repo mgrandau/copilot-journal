@@ -54,17 +54,26 @@ Installs to your VS Code User `prompts/` directory.
 ### Options
 
 ```bash
-copilot-journal --global --insiders    # VS Code Insiders
-copilot-journal --dry-run              # Preview without copying
-copilot-journal --log-level DEBUG      # Verbose output
+copilot-journal --journal-path my/journal  # Custom journal location
+copilot-journal --global --insiders        # VS Code Insiders
+copilot-journal --dry-run                  # Preview without copying
+copilot-journal --log-level DEBUG          # Verbose output
 ```
+
+When run interactively, the installer will prompt you for the journal path:
+
+```
+📓 Where should journal entries be stored? [docs/vault]: 
+```
+
+Press Enter to accept the default (`docs/vault`) or type a custom path.
 
 ## Journal Setup
 
-After installing the instructions, create a journal vault in your project:
+After installing the instructions, create your journal directory in your project:
 
 ```bash
-mkdir -p docs/vault
+mkdir -p docs/vault    # or whatever path you specified during install
 ```
 
 Copilot will write daily entries like `docs/vault/2026-02-18.md` with timestamped entries capturing your reasoning as you work.

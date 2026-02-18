@@ -50,6 +50,8 @@ class FileSystemProtocol(Protocol):
     def exists(self, path: Path) -> bool: ...
     def mkdir(self, path: Path, parents: bool = False, exist_ok: bool = False) -> None: ...
     def copy_file(self, src: Path, dst: Path) -> None: ...
+    def read_text(self, path: Path) -> str: ...
+    def write_text(self, path: Path, content: str) -> None: ...
     def get_cwd(self) -> Path: ...
 
 
@@ -68,6 +70,12 @@ class RealFileSystem:
 
     def copy_file(self, src: Path, dst: Path) -> None:  # pragma: no cover
         shutil.copy2(src, dst)
+
+    def read_text(self, path: Path) -> str:  # pragma: no cover
+        return path.read_text(encoding="utf-8")
+
+    def write_text(self, path: Path, content: str) -> None:  # pragma: no cover
+        path.write_text(content, encoding="utf-8")
 
     def get_cwd(self) -> Path:  # pragma: no cover
         return Path.cwd()
@@ -221,18 +229,33 @@ class AgentInstaller:
         path_resolver: PathResolver,
         editor_detector: EditorDetector,
         logger: logging.Logger,
+        journal_path: str = "docs/vault",
     ):
         self.agent_files_dir = agent_files_dir
         self.fs = fs
         self.path_resolver = path_resolver
         self.editor_detector = editor_detector
         self.logger = logger
+        self.journal_path = journal_path
 
     def _validate_source_files(self) -> bool:
         if not self.fs.exists(self.agent_files_dir):
             self.logger.error(f"❌ Error: Agent files directory not found: {self.agent_files_dir}")
             return False
         return True
+
+    def _apply_template_vars(self, target_dir: Path, files: list[FileMapping]) -> None:
+        """Replace template variables in installed files."""
+        for file_map in files:
+            dst = target_dir / file_map.dst_relative
+            try:
+                content = self.fs.read_text(dst)
+                if "{{JOURNAL_PATH}}" in content:
+                    content = content.replace("{{JOURNAL_PATH}}", self.journal_path)
+                    self.fs.write_text(dst, content)
+                    self.logger.debug(f"📝 Applied journal path to: {file_map.dst_relative}")
+            except OSError:
+                pass  # Non-critical — file was still copied
 
     def install_files(
         self, target_dir: Path, files: list[FileMapping], dry_run: bool = False
@@ -279,7 +302,9 @@ class AgentInstaller:
                 copied += 1
 
             if copied > 0:
+                self._apply_template_vars(target_dir, files)
                 self.logger.info(f"\n🎉 Successfully installed {copied} file(s) to {target_dir}")
+                self.logger.info(f"📓 Journal path set to: {self.journal_path}")
                 return InstallationResult(
                     success=True, files_copied=copied, target_dir=target_dir, files_failed=failed,
                 )
@@ -328,6 +353,7 @@ class AgentInstaller:
 def create_installer(
     agent_files_dir: Path | None = None,
     logger: logging.Logger | None = None,
+    journal_path: str = "docs/vault",
 ) -> AgentInstaller:
     if agent_files_dir is None:
         agent_files_dir = Path(__file__).parent / "agent_files"
@@ -341,7 +367,7 @@ def create_installer(
 
     return AgentInstaller(
         agent_files_dir=agent_files_dir, fs=fs, path_resolver=path_resolver,
-        editor_detector=editor_detector, logger=logger,
+        editor_detector=editor_detector, logger=logger, journal_path=journal_path,
     )
 
 
@@ -372,6 +398,8 @@ Examples:
                         help="Install globally to VS Code config directory")
     parser.add_argument("--local", "-l", dest="install_local", action="store_true",
                         help="Install locally to .github directory (default)")
+    parser.add_argument("--journal-path", "-j", type=str, default=None,
+                        help="Path where journal entries will be stored (default: docs/vault)")
     parser.add_argument("--insiders", "-i", action="store_true",
                         help="Install for VS Code Insiders")
     parser.add_argument("--dry-run", "-n", action="store_true",
@@ -387,7 +415,18 @@ Examples:
         return 1
 
     logger = setup_logging(level=args.log_level, log_file=args.log_file)
-    installer = create_installer(logger=logger)
+
+    # Determine journal path: CLI arg > interactive prompt > default
+    if args.journal_path is not None:
+        journal_path = args.journal_path
+    elif sys.stdin.isatty() and not args.dry_run:
+        default_path = "docs/vault"
+        user_input = input(f"📓 Where should journal entries be stored? [{default_path}]: ").strip()
+        journal_path = user_input if user_input else default_path
+    else:
+        journal_path = "docs/vault"
+
+    installer = create_installer(logger=logger, journal_path=journal_path)
     logger.info(f"🖥️  System: {platform.system()}")
     logger.info("")
 
