@@ -28,12 +28,22 @@ Entries are daily files named `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`.
 
 **Before writing:** Always read today's existing file first. Append new entries below existing ones. Never overwrite previous entries.
 
-If no file exists for today, create one. Entries are simple — timestamp + thought. No ceremony:
+If no file exists for today, create one with a single H1 title. Do NOT duplicate the title — one `# Journal - Month DD, YYYY` at the top, that's it.
+
+**Timestamps must use the developer's local time**, not UTC. Use 12-hour format with AM/PM.
+
+Entry format — timestamp + thought, no ceremony:
 
 ```markdown
-## 10:45 AM
+# Journal - February 18, 2026
+
+## 3:45 PM
 Chose approach X over Y because Z. Y would have required refactoring the
 entire module, and the deadline doesn't allow for that. Revisit in Q3.
+
+## 4:20 PM
+Hit a wall with the async approach — race condition on concurrent writes.
+Switched to synchronous queue. Slower but correct.
 ```
 
 ### What Gets Captured

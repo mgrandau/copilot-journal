@@ -22,12 +22,14 @@ Generate a structured daily journal entry by gathering context from today's work
 
 ## 3. Note Format
 
+Use the developer's local time for all timestamps, not UTC. Do NOT duplicate the title — one H1 at the top only.
+
 ```markdown
 ---
 id: daily.{{YYYY}}.{{MM}}.{{DD}}
 title: Journal - {{Month DD, YYYY}}
-created: {{timestamp}}
-updated: {{timestamp}}
+created: {{local timestamp}}
+updated: {{local timestamp}}
 ---
 
 # Journal - {{Month DD, YYYY}}
