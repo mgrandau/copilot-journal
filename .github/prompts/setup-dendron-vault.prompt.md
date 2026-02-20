@@ -39,27 +39,13 @@ schemas:
 
 Create or merge into existing `dendron.yml`. If vault `docs/journal` already listed, skip.
 
-```yaml
-version: 5
-publishing:
-  enableFMTitle: true
-  enableHierarchyDisplay: true
-  enableNoteTitleForLink: true
-preview:
-  enableFMTitle: true
-workspace:
-  vaults:
-    - fsPath: docs/journal
-      name: journal
-  journal:
-    dailyDomain: daily
-    dailyVault: journal
-    name: journal
-    dateFormat: "y.MM.dd"
-    addBehavior: childOfDomain
-  enableAutoCreateOnDefinition: true
-  enableXVaultWikiLink: false
-```
+**Do not hardcode config.** Instead:
+
+1. Read `docs/journal/dendron.yml` as the canonical reference for all Dendron settings (commands, workspace, preview, publishing).
+2. Create/update the root `dendron.yml` to include all sections from the reference, adjusting `workspace.vaults[].fsPath` to `docs/journal` (relative to workspace root).
+3. Ensure `workspace.vaults` includes `selfContained: true` and `name: journal`.
+4. Preserve any existing root-level settings not present in the reference (e.g., additional vaults).
+5. **Validate:** After writing, check `dendron.yml` for errors using the editor's YAML schema validation. Remove any properties flagged as "not allowed" by the Dendron schema. The file must have zero validation errors before proceeding.
 
 ## 4. VS Code Settings
 
@@ -96,10 +82,18 @@ created: {{TIMESTAMP}}
 First entry. Dendron vault initialized for project journaling.
 ```
 
-## 7. Verify
+## 7. Initialize Dendron Workspace
+
+Run the VS Code command `dendron.initWS` to initialize the Dendron workspace with the vault configuration. This tells Dendron to read `dendron.yml` and register the vault.
+
+If `dendron.initWS` is unavailable, instruct the user to run from the Command Palette:
+`Ctrl+Shift+P` → **Dendron: Initialize Workspace**
+
+## 8. Verify
 
 - `docs/journal/` has `root.md` and `root.schema.yml`
 - `dendron.yml` at workspace root references the vault
 - `.vscode/settings.json` has `dendron.rootDir`
 - `.gitignore` has `.dendron.*` and `seeds`
-- Tell user to reload VS Code (`Developer: Reload Window`)
+- Dendron tree view shows the journal vault
+- Tell user to reload VS Code (`Developer: Reload Window`) if vault not visible

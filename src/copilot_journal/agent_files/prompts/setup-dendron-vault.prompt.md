@@ -96,10 +96,18 @@ created: {{TIMESTAMP}}
 First entry. Dendron vault initialized for project journaling.
 ```
 
-## 7. Verify
+## 7. Initialize Dendron Workspace
+
+Run the VS Code command `dendron.initWS` to initialize the Dendron workspace with the vault configuration. This tells Dendron to read `dendron.yml` and register the vault.
+
+If `dendron.initWS` is unavailable, instruct the user to run from the Command Palette:
+`Ctrl+Shift+P` → **Dendron: Initialize Workspace**
+
+## 8. Verify
 
 - `docs/journal/` has `root.md` and `root.schema.yml`
 - `dendron.yml` at workspace root references the vault
 - `.vscode/settings.json` has `dendron.rootDir`
 - `.gitignore` has `.dendron.*` and `seeds`
-- Tell user to reload VS Code (`Developer: Reload Window`)
+- Dendron tree view shows the journal vault
+- Tell user to reload VS Code (`Developer: Reload Window`) if vault not visible
