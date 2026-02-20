@@ -104,9 +104,7 @@ This gives OpenClaw agents the same journaling workflow — capture decisions, r
 
 ## 💬 Community
 
-Join the Discord to discuss journaling workflows, share tips, and get help:
-
-[![Discord](https://img.shields.io/discord/1471362262282535078?color=5865F2&logo=discord&logoColor=white&label=Discord)](https://discord.gg/2KqjHvh5)
+💬 [Join the Discord community](https://discord.gg/2KqjHvh5)
 
 ## License
 
