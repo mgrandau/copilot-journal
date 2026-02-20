@@ -13,7 +13,7 @@ description: "Generate a structured end-of-day journal entry from git commits, A
 
 ## 2. Create/Update Daily Note
 
-Path: `{{JOURNAL_PATH}}/daily.{{YYYY}}.{{MM}}.{{DD}}.md`. Update if exists (preserve Decision Log entries), otherwise create. Local time only — no UTC. One H1, no duplicates.
+Path: `{{JOURNAL_PATH}}/daily.{{YYYY}}.{{MM}}.{{DD}}.md`. Update if exists (preserve Decision Log entries), otherwise create. One H1, no duplicates. No timestamps on entries — git history provides authoritative timing.
 
 ## 3. Note Format
 

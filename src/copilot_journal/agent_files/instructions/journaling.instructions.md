@@ -16,15 +16,15 @@ Journal vault: `{{JOURNAL_PATH}}`. Captures **why**, not what — git handles wh
 
 ### Format
 
-Daily files: `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`. Local time, 12-hour with AM/PM.
+Daily files: `YYYY-MM-DD.md` in `{{JOURNAL_PATH}}`.
 
-**Rules:** Read today's file first. Append only — never overwrite. One `# Journal - Month DD, YYYY` H1 per file.
+**Rules:** Read today's file first. Append only — never overwrite. One `# Journal - Month DD, YYYY` H1 per file. No timestamps — git history provides authoritative timing.
 
 ```markdown
 # Journal - February 18, 2026
 
-## 3:45 PM
-Chose X over Y because Z. Revisit in Q3.
+## Chose X over Y
+Because Z. Revisit in Q3.
 ```
 
 ### Capture

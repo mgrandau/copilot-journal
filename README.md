@@ -21,15 +21,17 @@ After installation, GitHub Copilot will automatically:
 ## Two Modes
 
 ### Real-time capture (always on)
+
 The instruction file runs passively during every Copilot interaction. Use trigger phrases to capture reasoning as it happens:
 
 | Command | What happens |
-|---------|-------------|
+| --- | --- |
 | `"journal that"` | Captures reasoning from current conversation |
 | `"log this"` | Quick capture of what you just discussed |
 | `"why did we do this?"` | Writes a decision record |
 
 ### End-of-day summary (on demand)
+
 The prompt file generates a structured daily summary when you invoke it. It automatically gathers git commits, AI session data, and memory notes into a formatted journal entry.
 
 Invoke it in Copilot chat by selecting the `daily-summary` prompt, or just say "summarize today".
@@ -48,8 +50,10 @@ copilot-journal
 ```
 
 Installs to `.github/`:
+
 - `instructions/journaling.instructions.md` — always-on, captures decisions as you work
 - `prompts/daily-summary.prompt.md` — on-demand end-of-day summary
+- `prompts/setup-dendron-vault.prompt.md` — on-demand Dendron vault setup
 
 ### Global (all repos)
 
@@ -57,7 +61,7 @@ Installs to `.github/`:
 copilot-journal --global
 ```
 
-Installs to your VS Code User `prompts/` directory.
+Installs all three files to your VS Code User `prompts/` directory.
 
 ### Options
 
@@ -70,7 +74,7 @@ copilot-journal --log-level DEBUG          # Verbose output
 
 When run interactively, the installer will prompt you for the journal path:
 
-```
+```text
 📓 Where should journal entries be stored? [docs/journal]: 
 ```
 
@@ -85,6 +89,18 @@ mkdir -p docs/journal    # or whatever path you specified during install
 ```
 
 Copilot will write daily entries like `docs/journal/2026-02-18.md` with timestamped entries capturing your reasoning as you work.
+
+## Project Context
+
+Key files for understanding the project's architecture and conventions:
+
+| Path | Purpose |
+| --- | --- |
+| [src/copilot_journal/README.md](src/copilot_journal/README.md) | Architecture & design overview |
+| [docs/journal/](docs/journal/) | Decision journal — the "why" behind changes |
+| [.github/instructions/project.instructions.md](.github/instructions/project.instructions.md) | Project conventions & workflows |
+| [skill/copilot-journal/SKILL.md](skill/copilot-journal/SKILL.md) | OpenClaw skill definition |
+| [utils/README.md](utils/README.md) | Utility scripts reference |
 
 ## Philosophy
 
@@ -102,7 +118,7 @@ cp -r skill/copilot-journal /path/to/openclaw/skills/
 
 This gives OpenClaw agents the same journaling workflow — capture decisions, reasoning, and context automatically.
 
-## 💬 Community
+## Community
 
 💬 [Join the Discord community](https://discord.gg/2KqjHvh5)
 
