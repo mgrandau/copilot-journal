@@ -102,6 +102,12 @@ cp -r skill/copilot-journal /path/to/openclaw/skills/
 
 This gives OpenClaw agents the same journaling workflow — capture decisions, reasoning, and context automatically.
 
+## 💬 Community
+
+Join the Discord to discuss journaling workflows, share tips, and get help:
+
+[![Discord](https://img.shields.io/discord/1471362262282535078?color=5865F2&logo=discord&logoColor=white&label=Discord)](https://discord.gg/2KqjHvh5)
+
 ## License
 
 MIT
