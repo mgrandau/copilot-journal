@@ -1,9 +1,8 @@
-__pycache__/
-*.pyc
-*.egg-info/
-dist/
-build/
-.venv/
+node_modules
+.dendron.*
+build
+seeds
+.next
+pods/service-connections
+pdm.lock
 .pdm-python
-*.swp
-.DS_Store

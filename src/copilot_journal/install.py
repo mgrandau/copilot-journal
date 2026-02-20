@@ -215,6 +215,7 @@ class AgentInstaller:
     SOURCE_FILES: list[str] = [
         "instructions/journaling.instructions.md",
         "prompts/daily-summary.prompt.md",
+        "prompts/setup-dendron-vault.prompt.md",
     ]
 
     LOCAL_FILES: list[FileMapping] = [FileMapping(src, src) for src in SOURCE_FILES]
