@@ -35,16 +35,18 @@ schemas:
     parent: root
 ```
 
-## 3. `dendron.yml` at Workspace Root
+## 3. `dendron.yml` at Workspace Root (Single Config)
+
+There is only one `dendron.yml` — at the workspace root. Do **not** create a vault-level `dendron.yml` inside `docs/journal/`. Do **not** use `selfContained: true` on the vault. All Dendron configuration lives in the root config.
 
 Create or merge into existing `dendron.yml`. If vault `docs/journal` already listed, skip.
 
 **Do not hardcode config.** Instead:
 
-1. Read `docs/journal/dendron.yml` as the canonical reference for all Dendron settings (commands, workspace, preview, publishing).
-2. Create/update the root `dendron.yml` to include all sections from the reference, adjusting `workspace.vaults[].fsPath` to `docs/journal` (relative to workspace root).
-3. Ensure `workspace.vaults` includes `selfContained: true` and `name: journal`.
-4. Preserve any existing root-level settings not present in the reference (e.g., additional vaults).
+1. Read the existing root `dendron.yml` to understand the current structure.
+2. Ensure `workspace.vaults` includes `fsPath: docs/journal` and `name: journal` (no `selfContained`).
+3. Ensure all standard Dendron sections are present: `dev`, `commands`, `workspace` (journal, scratch, task, graph), `preview`, `publishing`.
+4. Preserve any existing settings (e.g., additional vaults).
 5. **Validate:** After writing, check `dendron.yml` for errors using the editor's YAML schema validation. Remove any properties flagged as "not allowed" by the Dendron schema. The file must have zero validation errors before proceeding.
 
 ## 4. VS Code Settings

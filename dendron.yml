@@ -1,7 +1,6 @@
 version: 5
 dev:
     enablePreviewV2: true
-    enableSelfContainedVaults: true
 commands:
     lookup:
         note:
@@ -24,7 +23,6 @@ workspace:
     vaults:
         -
             fsPath: docs/journal
-            selfContained: true
             name: journal
     journal:
         dailyDomain: daily

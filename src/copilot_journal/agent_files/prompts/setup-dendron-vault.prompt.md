@@ -35,31 +35,19 @@ schemas:
     parent: root
 ```
 
-## 3. `dendron.yml` at Workspace Root
+## 3. `dendron.yml` at Workspace Root (Single Config)
+
+There is only one `dendron.yml` — at the workspace root. Do **not** create a vault-level `dendron.yml` inside `docs/journal/`. Do **not** use `selfContained: true` on the vault. All Dendron configuration lives in the root config.
 
 Create or merge into existing `dendron.yml`. If vault `docs/journal` already listed, skip.
 
-```yaml
-version: 5
-publishing:
-  enableFMTitle: true
-  enableHierarchyDisplay: true
-  enableNoteTitleForLink: true
-preview:
-  enableFMTitle: true
-workspace:
-  vaults:
-    - fsPath: docs/journal
-      name: journal
-  journal:
-    dailyDomain: daily
-    dailyVault: journal
-    name: journal
-    dateFormat: "y.MM.dd"
-    addBehavior: childOfDomain
-  enableAutoCreateOnDefinition: true
-  enableXVaultWikiLink: false
-```
+**Do not hardcode config.** Instead:
+
+1. Read the existing root `dendron.yml` to understand the current structure.
+2. Ensure `workspace.vaults` includes `fsPath: docs/journal` and `name: journal` (no `selfContained`).
+3. Ensure all standard Dendron sections are present: `dev`, `commands`, `workspace` (journal, scratch, task, graph), `preview`, `publishing`.
+4. Preserve any existing settings (e.g., additional vaults).
+5. **Validate:** After writing, check `dendron.yml` for errors using the editor's YAML schema validation. Remove any properties flagged as "not allowed" by the Dendron schema. The file must have zero validation errors before proceeding.
 
 ## 4. VS Code Settings
 
