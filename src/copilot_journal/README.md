@@ -157,10 +157,10 @@ assert result.success
 
 | Source | Key | Default |
 |--------|-----|---------|
-| CLI arg | `-j` / `--journal-path` | `docs/vault` |
+| CLI arg | `-j` / `--journal-path` | `docs/journal` |
 | CLI arg | `--log-level` | `INFO` |
 | CLI arg | `--log-file` | None (stdout only) |
-| Interactive | TTY prompt | `docs/vault` |
+| Interactive | TTY prompt | `docs/journal` |
 | Template var | `{{JOURNAL_PATH}}` | Replaced at install time |
 
 ### Pitfalls

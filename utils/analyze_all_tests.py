@@ -22,7 +22,9 @@ import argparse
 import json
 import sys
 from datetime import UTC, datetime
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 # Patterns to exclude from file discovery
 EXCLUDED_PATTERNS = ("__pycache__", ".pyc", "node_modules", ".git", "bin", "obj")
@@ -66,7 +68,7 @@ def find_test_files(target_dir: Path, supported_extensions: list[str]) -> list[P
 def analyze_single_file(
     file_path: Path,
     project_root: Path,
-    analyze_func: callable,
+    analyze_func: Callable[..., Any],
 ) -> dict:
     """Analyze a single test file and return structured results.
 

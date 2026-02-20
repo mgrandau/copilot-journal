@@ -984,7 +984,7 @@ class AgentInstaller:
         path_resolver: PathResolver,
         editor_detector: EditorDetector,
         logger: logging.Logger,
-        journal_path: str = "docs/vault",
+        journal_path: str = "docs/journal",
     ):
         """Initialize the installer with all dependencies.
 
@@ -996,7 +996,7 @@ class AgentInstaller:
             editor_detector: Detects installed VS Code variant.
             logger: Logger for installation progress messages.
             journal_path: Value substituted for ``{{JOURNAL_PATH}}``
-                in installed template files. Defaults to 'docs/vault'.
+                in installed template files. Defaults to 'docs/journal'.
 
         Returns:
             None
@@ -1011,7 +1011,7 @@ class AgentInstaller:
             ...     path_resolver=resolver,
             ...     editor_detector=detector,
             ...     logger=logging.getLogger(__name__),
-            ...     journal_path="docs/vault",
+            ...     journal_path="docs/journal",
             ... )
 
         Business context:
@@ -1306,7 +1306,7 @@ class AgentInstaller:
 def create_installer(
     agent_files_dir: Path | None = None,
     logger: logging.Logger | None = None,
-    journal_path: str = "docs/vault",
+    journal_path: str = "docs/journal",
 ) -> AgentInstaller:
     """Build an AgentInstaller wired with real filesystem and environment.
 
@@ -1367,7 +1367,7 @@ def main() -> int:
     journal path prompting when stdin is a TTY.
 
     The precedence for journal path is:
-    CLI ``--journal-path`` arg > interactive prompt > default 'docs/vault'.
+    CLI ``--journal-path`` arg > interactive prompt > default 'docs/journal'.
 
     Args:
         None (uses ``argparse`` to parse ``sys.argv``).
@@ -1420,7 +1420,7 @@ Examples:
     parser.add_argument("--local", "-l", dest="install_local", action="store_true",
                         help="Install locally to .github directory (default)")
     parser.add_argument("--journal-path", "-j", type=str, default=None,
-                        help="Path where journal entries will be stored (default: docs/vault)")
+                        help="Path where journal entries will be stored (default: docs/journal)")
     parser.add_argument("--insiders", "-i", action="store_true",
                         help="Install for VS Code Insiders")
     parser.add_argument("--dry-run", "-n", action="store_true",
@@ -1441,21 +1441,18 @@ Examples:
     if args.journal_path is not None:
         journal_path = args.journal_path
     elif sys.stdin.isatty() and not args.dry_run:
-        default_path = "docs/vault"
+        default_path = "docs/journal"
         user_input = input(f"📓 Where should journal entries be stored? [{default_path}]: ").strip()
         journal_path = user_input if user_input else default_path
     else:
-        journal_path = "docs/vault"
+        journal_path = "docs/journal"
 
     installer = create_installer(logger=logger, journal_path=journal_path)
     logger.info(f"🖥️  System: {platform.system()}")
     logger.info("")
 
     if args.install_global:
-        editor = (
-            EditorDetector.SUPPORTED_EDITORS[0] if args.insiders
-            else EditorDetector.DEFAULT_EDITOR
-        )
+        editor = "Code-Insiders" if args.insiders else None
         result = installer.install_global(editor, args.dry_run)
     else:
         result = installer.install_local(args.dry_run)

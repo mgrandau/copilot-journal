@@ -412,7 +412,7 @@ def _make_installer(
     fs: FakeFileSystem,
     env: FakeEnvironment | None = None,
     agent_files_dir: Path | None = None,
-    journal_path: str = "docs/vault",
+    journal_path: str = "docs/journal",
 ) -> AgentInstaller:
     """Build an AgentInstaller wired with fake dependencies for testing.
 
@@ -2346,7 +2346,7 @@ class TestCreateInstaller:
         Assertion Strategy:
             Validates default configuration by confirming:
             - Return type is AgentInstaller.
-            - journal_path defaults to "docs/vault".
+            - journal_path defaults to "docs/journal".
 
         Testing Principle:
             Validates sensible defaults, ensuring zero-config usage
@@ -2354,7 +2354,7 @@ class TestCreateInstaller:
         """
         installer = create_installer()
         assert isinstance(installer, AgentInstaller)
-        assert installer.journal_path == "docs/vault"
+        assert installer.journal_path == "docs/journal"
 
     def test_custom_args(self, tmp_path: Path) -> None:
         """Verifies create_installer forwards custom arguments to the installer.
@@ -2567,7 +2567,7 @@ class TestMain:
             patch("copilot_journal.install.create_installer", return_value=mock),
         ):
             assert main() == 0
-            mock.install_global.assert_called_once_with("Code", False)
+            mock.install_global.assert_called_once_with(None, False)
 
     def test_global_install_insiders(self) -> None:
         """Verifies main targets VS Code Insiders when --insiders is specified.
@@ -2623,7 +2623,7 @@ class TestMain:
         Assertion Strategy:
             Validates dry-run forwarding by confirming:
             - Return code is 0.
-            - install_global was called with ("Code", True).
+            - install_global was called with (None, True).
 
         Testing Principle:
             Validates flag propagation, ensuring --dry-run reaches
@@ -2635,7 +2635,7 @@ class TestMain:
             patch("copilot_journal.install.create_installer", return_value=mock),
         ):
             assert main() == 0
-            mock.install_global.assert_called_once_with("Code", True)
+            mock.install_global.assert_called_once_with(None, True)
 
     def test_local_dry_run(self) -> None:
         """Verifies main passes dry_run=True for local installs with --dry-run.
@@ -2752,7 +2752,7 @@ class TestMain:
         """Verifies main falls back to the default journal_path on empty input.
 
         Tests that pressing Enter without typing at the interactive prompt
-        uses the default "docs/vault" path.
+        uses the default "docs/journal" path.
 
         Business context:
             Users who accept the default should not be forced to type it;
@@ -2768,7 +2768,7 @@ class TestMain:
 
         Assertion Strategy:
             Validates default fallback by confirming:
-            - create_installer received journal_path="docs/vault".
+            - create_installer received journal_path="docs/journal".
 
         Testing Principle:
             Validates default-on-empty, ensuring the prompt treats
@@ -2786,7 +2786,7 @@ class TestMain:
             mock_stdin.isatty.return_value = True
             main()
             _, kwargs = create_mock.call_args
-            assert kwargs["journal_path"] == "docs/vault"
+            assert kwargs["journal_path"] == "docs/journal"
 
     def test_dry_run_skips_interactive(self) -> None:
         """Verifies main skips the interactive prompt during dry-run mode.
@@ -2808,7 +2808,7 @@ class TestMain:
 
         Assertion Strategy:
             Validates prompt suppression by confirming:
-            - create_installer received journal_path="docs/vault" (default).
+            - create_installer received journal_path="docs/journal" (default).
 
         Testing Principle:
             Validates mode interaction, ensuring dry-run overrides
@@ -2825,7 +2825,7 @@ class TestMain:
             mock_stdin.isatty.return_value = True
             main()
             _, kwargs = create_mock.call_args
-            assert kwargs["journal_path"] == "docs/vault"
+            assert kwargs["journal_path"] == "docs/journal"
 
     def test_non_interactive_uses_default(self) -> None:
         """Verifies main uses the default journal_path in non-interactive mode.
@@ -2846,7 +2846,7 @@ class TestMain:
 
         Assertion Strategy:
             Validates non-interactive fallback by confirming:
-            - create_installer received journal_path="docs/vault".
+            - create_installer received journal_path="docs/journal".
 
         Testing Principle:
             Validates environment detection, ensuring non-TTY stdin
@@ -2863,7 +2863,7 @@ class TestMain:
             mock_stdin.isatty.return_value = False
             main()
             _, kwargs = create_mock.call_args
-            assert kwargs["journal_path"] == "docs/vault"
+            assert kwargs["journal_path"] == "docs/journal"
 
     def test_log_level_and_log_file(self, tmp_path: Path) -> None:
         """Verifies main accepts --log-level and --log-file without errors.

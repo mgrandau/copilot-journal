@@ -9,7 +9,7 @@ Git captures **what**. The journal captures **why**.
 
 ## Where to Write
 
-Daily files `YYYY-MM-DD.md` in the project's journal directory. Path configured via `copilot-journal --journal-path <path>` (default: `docs/vault/`). Check `journaling.instructions.md` for the configured path. Create the directory if missing.
+Daily files `YYYY-MM-DD.md` in the project's journal directory. Path configured via `copilot-journal --journal-path <path>` (default: `docs/journal/`). Check `journaling.instructions.md` for the configured path. Create the directory if missing.
 
 ## How to Write
 

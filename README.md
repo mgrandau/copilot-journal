@@ -71,20 +71,20 @@ copilot-journal --log-level DEBUG          # Verbose output
 When run interactively, the installer will prompt you for the journal path:
 
 ```
-📓 Where should journal entries be stored? [docs/vault]: 
+📓 Where should journal entries be stored? [docs/journal]: 
 ```
 
-Press Enter to accept the default (`docs/vault`) or type a custom path.
+Press Enter to accept the default (`docs/journal`) or type a custom path.
 
 ## Journal Setup
 
 After installing the instructions, create your journal directory in your project:
 
 ```bash
-mkdir -p docs/vault    # or whatever path you specified during install
+mkdir -p docs/journal    # or whatever path you specified during install
 ```
 
-Copilot will write daily entries like `docs/vault/2026-02-18.md` with timestamped entries capturing your reasoning as you work.
+Copilot will write daily entries like `docs/journal/2026-02-18.md` with timestamped entries capturing your reasoning as you work.
 
 ## Philosophy
 

@@ -55,6 +55,10 @@ All markdown files must pass linting. Fix errors before committing.
 
 **Tables**: spaces around pipes in separator row (`| --- |` not `|---|`).
 
+## Documentation
+
+Over-document for AI context windows. All public functions, Protocol methods, test fakes, and thin delegates require full docstrings. Docstrings are context — they help Copilot understand intent, business logic, and relationships between components.
+
 ## Git
 
 Commits: `feat:|fix:|docs:|refactor:|test:|chore:` + description. Branches: `main`, `feature/<x>`, `fix/<x>`.
