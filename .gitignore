@@ -1,8 +1,55 @@
-node_modules
-.dendron.*
-build
-seeds
-.next
-pods/service-connections
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+eggs/
+*.eggs
+sdist/
+wheels/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Type checking
+.mypy_cache/
+.pytype/
+
+# Ruff
+.ruff_cache/
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# PDM
 pdm.lock
 .pdm-python
+
+# Dendron
+.dendron.*
+seeds
+
+# Node (Dendron extension)
+node_modules
+.next
+
+# Other
+build
+pods/service-connections
