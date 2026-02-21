@@ -2,6 +2,10 @@
 
 Install GitHub Copilot instructions that enable automatic journaling of design decisions, reasoning, and context as you code.
 
+## Related Writing
+
+📝 [Follow the Knowledge (That's the Context)](https://mgrandau.medium.com/follow-the-knowledge-thats-the-context-7860c47e5fc8?source=friends_link&sk=eb124f0721a90fd8d45314f0a34ca6cb) — The thinking behind why capturing decisions and context matters, especially in an AI-assisted workflow.
+
 ## What It Does
 
 After installation, GitHub Copilot will automatically:
