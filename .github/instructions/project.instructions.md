@@ -2,6 +2,29 @@
 applyTo: "**"
 ---
 
+# Project Intent & Design
+
+This project follows the [Human-AI Intent Transfer Principles](https://mgrandau.medium.com/human-ai-intent-transfer-principles-b6e7404e3d26?source=friends_link&sk=858917bd3f4a686974ed6b6c9c059ac8) — the journal IS the intent transfer mechanism.
+
+**Context chain (read in order when making design decisions):**
+
+1. [🧭 Intent](../../README.md#-intent) — project philosophy: git captures what, journal captures why
+2. [PROJECT_PLAN.md](../../docs/PROJECT_PLAN.md) — phase goals, risk posture, version history
+3. [Journal entries](../../docs/journal/) — design alternatives explored and rejected, with rationale
+4. [Architecture](../../src/copilot_journal/README.md) — component map, invariants, DI contracts, AI-accessibility map
+5. Source code — the implementation
+
+**Core design values (from rejection patterns in the journal):**
+
+- **Zero runtime dependencies** — stdlib only, no pip installs needed beyond the package itself
+- **Protocol-based DI** — testability without mocks, `FileSystemProtocol` / `EnvironmentProtocol`
+- **Agent files are package-managed** — bundled templates, copied on install, not user-editable
+- **Self-documenting defaults** — `docs/journal` not `docs/vault`, explicit strings not list indexing
+- **Static repo copies** — `.github/instructions/` exists so Copilot works without running the installer
+- **Git is the timeline** — no AI timestamps, `git log` and `git blame` are authoritative
+
+When proposing new features or changes, check the journal for prior art — the alternative you're considering may have already been evaluated and rejected.
+
 # GitHub CLI Quick Reference
 
 Requires: `gh auth status` (authenticated).

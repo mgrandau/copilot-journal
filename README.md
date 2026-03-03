@@ -108,9 +108,19 @@ Key files for understanding the project's architecture and conventions:
 
 ## Philosophy
 
-Your git log captures **what** changed. Your journal captures **why**.
+## 🧭 Intent
 
-Six months from now, when someone asks "why did you do it this way?" — you'll have the answer.
+Your git log captures **what** changed. Your journal captures **why.**
+
+Most AI-assisted development loses context the moment the conversation ends. The code lands in a commit, but the reasoning — why you chose approach X over Y, what you tried and abandoned, what constraints shaped the decision — evaporates. Six months later, someone asks "why did you do it this way?" and nobody remembers.
+
+This tool exists to close that gap. It installs instructions that make GitHub Copilot a persistent decision logger, capturing reasoning as a natural byproduct of the conversation you're already having.
+
+The design follows the [Human-AI Intent Transfer Principles](https://mgrandau.medium.com/human-ai-intent-transfer-principles-b6e7404e3d26?source=friends_link&sk=858917bd3f4a686974ed6b6c9c059ac8): the core idea is that **the journal is the intent transfer mechanism** — it externalizes and persists the context that would otherwise live only in a chat window. Every rejected alternative documented is optionality preserved. Every decision record is rationale made inspectable.
+
+These principles shaped the project itself: the [project plan](docs/PROJECT_PLAN.md) documents goals and risk posture per phase, and the [journal entry](docs/journal/daily.journal.2026.02.20.md) captures every design alternative explored and why it was rejected.
+
+This isn't about documentation for documentation's sake. It's about making your future self (and your future AI) smarter about your codebase.
 
 ## OpenClaw Skill
 
