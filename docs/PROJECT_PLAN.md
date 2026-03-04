@@ -27,6 +27,8 @@ Established the core installer with Protocol-based dependency injection, templat
 
 **Goal:** Fix bugs found in real usage, establish project conventions, and document architecture thoroughly enough that an AI can work on the codebase without handholding.
 
+**Intent evolution:** Phase 2 clarified what the journal is *not* responsible for. The project started assuming the AI would capture everything — including timestamps. After discovering AI fabricates plausible-looking times, we explicitly drew the line: the journal captures *reasoning*, git captures *timing*. This is the same pattern as ai-session-tracker's S3 removal — a responsibility boundary clarification. The tool does one thing well and delegates the rest.
+
 Comprehensive code review uncovered 3 critical bugs (Insiders indexing, journal path mismatch, template drift). Created architecture documentation and project conventions. Removed AI-generated timestamps from journal format.
 
 **Key decisions:**
