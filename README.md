@@ -1,8 +1,8 @@
 # copilot-journal
 
-## 🧭 Intent
+Your git log captures what changed. Your journal captures why.
 
-Your git log captures **what** changed. Your journal captures **why.**
+## 🧭 Intent
 
 Most AI-assisted development loses context the moment the conversation ends. The code lands in a commit, but the reasoning — why you chose approach X over Y, what you tried and abandoned, what constraints shaped the decision — evaporates. Six months later, someone asks "why did you do it this way?" and nobody remembers.
 
