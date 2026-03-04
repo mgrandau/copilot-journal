@@ -1,7 +1,5 @@
 # copilot-journal
 
-Install GitHub Copilot instructions that enable automatic journaling of design decisions, reasoning, and context as you code.
-
 ## 🧭 Intent
 
 Your git log captures **what** changed. Your journal captures **why.**
