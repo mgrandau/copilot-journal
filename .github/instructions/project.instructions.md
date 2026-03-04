@@ -39,16 +39,34 @@ Requires: `gh auth status` (authenticated).
 | Submit fix | `gh pr create --title "Fix #N"` (auto-links issue) |
 | Merge | `gh pr merge N --squash --delete-branch` |
 
-## Release
+## Release Process
 
-```bash
-# 1. Update version
-# Edit src/copilot_journal/__version__.py
+### Version Badge
 
-# 2. Commit, tag, push, release
-git commit -am "Bump to X.X.X" && git tag vX.X.X && git push origin vX.X.X
-gh release create vX.X.X --title "vX.X.X" --generate-notes
-```
+The README badge auto-updates from GitHub releases — no manual badge edits needed.
+
+### Release Steps
+
+1. Update version in `src/copilot_journal/__version__.py`
+2. Commit changes: `git commit -am "release: bump version to X.X.X"`
+3. Create and push tag: `git tag vX.X.X && git push origin vX.X.X`
+4. Create GitHub release with **changelog notes** covering:
+   - **Bug Fixes** — issues fixed with brief description
+   - **Features** — new functionality added
+   - **Documentation** — significant doc improvements
+   - Link to full changelog comparison: `https://github.com/mgrandau/copilot-journal/compare/vPREV...vX.X.X`
+
+### Changelog Requirements
+
+- Every release **must** have human-written changelog notes — do not rely solely on `--generate-notes`
+- Reference issue numbers (e.g., "Fixed #3: journal path mismatch")
+- Keep notes concise but meaningful — someone reading them should understand what changed and why
+
+### Notes
+
+- Tags must match pattern `vX.X.X` (e.g., `v0.3.1`)
+- `--generate-notes` auto-generates release notes from commits
+- Badge updates within minutes of release creation
 
 ## PDM Scripts
 
